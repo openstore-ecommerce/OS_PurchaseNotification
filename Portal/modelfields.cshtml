@@ -1,0 +1,23 @@
+﻿@inherits NBrightBuy.render.NBrightBuyRazorTokens<NBrightDNN.NBrightRazor>
+@using System.Globalization
+@using System.Linq
+@using System.Web.UI.WebControls
+@using NBrightDNN
+
+@{
+    // assign Model, so we can resolve var in VS
+    var info = (NBrightInfo)Model.List.First();
+}
+
+@AddMetaData("resourcepath", "/DesktopModules/NBright/NBrightBuy/App_LocalResources/")
+@AddMetaData("resourcepath", "/DesktopModules/NBright/OS_PurchaseNotification/App_LocalResources/")
+
+
+<div class="col-sm-12">
+    <div class="col-sm-1" style="width:80px;">
+        <br />
+        <label>@ResourceKey("Admin.purchasenotificationflag")</label>
+        @CheckBox(info, "genxml/checkbox/purchasenotificationflag", "", "")
+    </div>
+</div>
+

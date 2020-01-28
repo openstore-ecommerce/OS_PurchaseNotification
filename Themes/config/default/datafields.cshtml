@@ -1,0 +1,74 @@
+﻿@inherits NBrightBuy.render.NBrightBuyRazorTokens<NBrightDNN.NBrightRazor>
+@using System.Globalization
+@using System.Linq
+@using System.Web.UI.WebControls
+@using NBrightDNN
+
+@AddMetaData("resourcepath", "/DesktopModules/NBright/NBrightBuy/App_LocalResources/")
+@AddMetaData("resourcepath", "/DesktopModules/NBright/OS_PurchaseNotification/App_LocalResources/")
+
+
+@{
+    // assign Model, so we can resolve var in VS
+    var info = (NBrightInfo)Model.List.First();
+}
+
+
+<input id="itemid" type="hidden" value="@info.ItemID" />
+<input id="editlang" type="hidden" value="@info.Lang" />
+
+<h1>
+    @ResourceKey("Admin.purchasenotification")
+</h1>
+<div>
+    <p>
+        @ResourceKey("Admin.purchasenotification", "", "Help")
+    </p>
+</div>
+
+<div class="col-xs-12 col-sm-12">
+    <div class="form-group depotdetail">
+
+        <div class="col-sm-12">
+            <div class="col-sm-6">
+                <br />
+                <label>@ResourceKey("Admin.defaultlimit")</label>
+                @TextBox(info, "genxml/lang/genxml/textbox/notifytitle", "class='form-control' style='width:60px;'", "-1")
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="col-sm-12">
+                <br />
+                <label>@ResourceKey("Admin.productlimitmsg")</label>
+                @NBrightTextArea(info, "genxml/lang/genxml/textbox/notifymsg", "row='6' class='form-control'", ResourceKey("Admin.productlimitmsgdefault").ToString())
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="col-sm-12">
+                <br />
+                <label>@ResourceKey("Admin.email")</label>
+                @TextBox(info, "genxml/textbox/emailcsv", "class='form-control' style=''", "")
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="col-sm-6">
+                <br />
+                <label>@ResourceKey("Admin.turnoff")</label>
+                @CheckBox(info, "genxml/checkbox/turnoff", "", "")
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <div class="col-sm-5">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <hr />
+                <div>Id: @info.ItemID  Guid: @info.GUIDKey</div>
+            </div>
+        </div>
+    </div>
+
+</div>
