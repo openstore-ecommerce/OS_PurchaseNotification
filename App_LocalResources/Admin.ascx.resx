@@ -120,6 +120,9 @@
   <data name="email.Text" xml:space="preserve">
     <value>Extra Email Notification (CSV)</value>
   </data>
+  <data name="emailsubject.Text" xml:space="preserve">
+    <value>Email Subject</value>
+  </data>
   <data name="notifymsg.Text" xml:space="preserve">
     <value>Notification Message</value>
   </data>

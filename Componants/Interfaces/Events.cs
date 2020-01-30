@@ -109,10 +109,12 @@ namespace OpenStore.Providers.OS_PurchaseNotification
                 var emailBody = NBrightBuyUtils.RazorTemplRender("EmailHtmlOutput.cshtml", 0, "", orderData, "/DesktopModules/NBright/OS_PurchaseNotification", "config", orderData.Lang, passSettings);
 
                 var emailList = StoreSettings.Current.ManagerEmail + ",";
-                emailList += purhcaseNotifyInfo.GetXmlPropertyBool("genxml/textbox/emailcsv");
+                emailList += purhcaseNotifyInfo.GetXmlProperty("genxml/textbox/emailcsv");
                 emailList = emailList.TrimEnd(',');
 
-                NBrightBuyUtils.SendEmail(emailBody, emailList, "", orderData.GetInfo(), "", "", orderData.Lang);
+                var emailSubject = purhcaseNotifyInfo.GetXmlProperty("genxml/textbox/emailsubject");
+
+                NBrightBuyUtils.SendEmail(emailBody, emailList, "", orderData.GetInfo(), emailSubject, "", orderData.Lang);
             }
 
             return nbrightInfo;
