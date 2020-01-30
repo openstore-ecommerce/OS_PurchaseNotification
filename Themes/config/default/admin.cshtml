@@ -2,6 +2,7 @@
 @using System.Globalization
 @using NBrightDNN
 @using NBrightCore.common
+@using DotNetNuke.Entities.Users;
 
 @AddMetaData("resourcepath", "/DesktopModules/NBright/NBrightBuy/App_LocalResources/")
 @AddMetaData("resourcepath", "/DesktopModules/NBright/OS_PurchaseNotification/App_LocalResources/")
@@ -37,5 +38,15 @@
         @EditCultureSelect("editlanguage", "")
     </div>
 </div>
+
 <br />
 <div id="editdata"></div>
+@{
+    var currentuser = UserController.Instance.GetCurrentUserInfo();
+}
+@if (currentuser.IsInRole("Administrators"))
+{
+    <div>
+        <button id="cmdtestemail" type="button" class="btn btn-primary">Test Email</button>
+    </div>
+}

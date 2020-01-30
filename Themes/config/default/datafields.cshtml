@@ -32,15 +32,15 @@
         <div class="col-sm-12">
             <div class="col-sm-6">
                 <br />
-                <label>@ResourceKey("Admin.defaultlimit")</label>
-                @TextBox(info, "genxml/lang/genxml/textbox/notifytitle", "class='form-control' style='width:60px;'", "-1")
+                <label>@ResourceKey("Admin.notifytitle")</label>
+                @NBrightTextBox(info, "genxml/lang/genxml/textbox/notifytitle", "class='form-control' style=''", "")
             </div>
         </div>
 
         <div class="col-sm-12">
             <div class="col-sm-12">
                 <br />
-                <label>@ResourceKey("Admin.productlimitmsg")</label>
+                <label>@ResourceKey("Admin.notifymsg")</label>
                 @NBrightTextArea(info, "genxml/lang/genxml/textbox/notifymsg", "row='6' class='form-control'", ResourceKey("Admin.productlimitmsgdefault").ToString())
             </div>
         </div>

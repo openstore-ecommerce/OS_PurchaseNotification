@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml;
+using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
+using DotNetNuke.Security.Roles;
 using NBrightCore.common;
 using NBrightDNN;
 using Nevoweb.DNN.NBrightBuy.Components;
@@ -32,6 +31,22 @@ namespace OpenStore.Providers.OS_PurchaseNotification
             return false;
         }
 
-
+        public static void OutputTestEmail()
+        {
+            var objCtrl = new NBrightBuyController();
+            var l = objCtrl.GetList(PortalSettings.Current.PortalId, -1, "ORDER", " and NB1.XMLdata.value('(genxml/productlimitflag)[1]','nvarchar(max)') = 'True' ", "", 1);
+            if (l.Count > 0)
+            {
+                var nbi = l.First();
+                var orderData = new OrderData(nbi.ItemID);
+                var passSettings = new Dictionary<string, string>();
+                var emailBody = NBrightBuyUtils.RazorTemplRender("EmailHtmlOutput.cshtml", 0, "", orderData, "/DesktopModules/NBright/OS_PurchaseNotification", "config", orderData.Lang, passSettings);
+                Utils.SaveFile(PortalSettings.Current.HomeDirectoryMapPath + "\\testemail.html", emailBody);
+            }
+            else
+            {
+                Utils.SaveFile(PortalSettings.Current.HomeDirectoryMapPath + "\\testemail.html", "NO ORDERS with purchase notification");
+            }
+        }
     }
 }

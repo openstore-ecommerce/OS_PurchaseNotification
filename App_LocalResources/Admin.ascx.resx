@@ -120,6 +120,12 @@
   <data name="email.Text" xml:space="preserve">
     <value>Extra Email Notification (CSV)</value>
   </data>
+  <data name="notifymsg.Text" xml:space="preserve">
+    <value>Notification Message</value>
+  </data>
+  <data name="notifytitle.Text" xml:space="preserve">
+    <value>Notification Title</value>
+  </data>
   <data name="purchasenotification.Help" xml:space="preserve">
     <value>Each product model can be marked to send a notification to the manager when it has been purchased.  There is also an option to send that notification to other email addresses.</value>
   </data>

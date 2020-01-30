@@ -54,6 +54,10 @@ namespace OpenStore.Providers.OS_PurchaseNotification
                     objCtrl.SavePluginSinglePageData(context);
                     strOut = "";
                     break;
+                case "os_purchasenotification_testemail":
+                    LocalUtils.OutputTestEmail();
+                    strOut = LocalUtils.GetData(editlang, "datafields.cshtml");
+                    break;
             }
 
             return strOut;

@@ -15,6 +15,7 @@
     var nbi = ordData.GetInfo();
     var emaillang = Model.Lang;
 
+    var objCtrl = new NBrightBuyController();
     var purhcaseNotifyInfo = objCtrl.GetPluginSinglePageData("OS_PurchaseNotificationDATA", "OS_PurchaseNotificationDATA", Utils.GetCurrentCulture());
 
     }
@@ -126,8 +127,8 @@
                     <table width="800" border="0" cellpadding="20" cellspacing="0" align="center" bgcolor="#ffffff">
                         <tr>
                             <td width="100%" align="left" valign="top" style="line-height:150%">
-                                <h2>@purhcaseNotifyInfo.GetXmlPropertyBool("genxml/lang/genxml/textbox/notifytitle"))</h2>
-                                <p>@purhcaseNotifyInfo.GetXmlPropertyBool("genxml/lang/genxml/textbox/notifymsg"))</p>
+                                <h2>@purhcaseNotifyInfo.GetXmlProperty("genxml/lang/genxml/textbox/notifytitle")</h2>
+                                <p>@BreakOf(purhcaseNotifyInfo.GetXmlProperty("genxml/lang/genxml/textbox/notifymsg"))</p>
                             </td>
                         </tr>
                     </table>
@@ -140,7 +141,6 @@
                             <td width="50%" align="left" valign="top" style="line-height:150%">
                                 <div><b>@ResourceKey("OrderAdmin.ordernumber", emaillang): </b>@nbi.GetXmlProperty("genxml/ordernumber")</div>
                                 <div><b>@ResourceKey("OrderAdmin.orderdate", emaillang): </b>@DateOf(nbi.GetXmlPropertyRaw("genxml/createddate"))</div>
-                                <div><b>@ResourceKey("OrderAdmin.PaymentMethod", emaillang)</b></div>
                             </td>
                         </tr>
 
@@ -165,7 +165,22 @@
                                     <tr>
                                         <td class="m-ticker">
                                             <div>
-                                                <b> <a href="@EntryUrl(nbiitem,Model,false)">@nbiitem.GetXmlProperty("genxml/productname")&nbsp;@nbiitem.GetXmlProperty("genxml/modeldesc")</a></b>
+                                                <b>
+                                                    @{
+                                                        var moduleid = nbiitem.GetXmlProperty("genxml/modelid");
+                                                    }
+
+                                                    @if (nbiitem.GetXmlPropertyBool("genxml/productxml/genxml/models/genxml[./hidden/modelid='" + moduleid + "']/checkbox/purchasenotificationflag"))
+                                                    {
+                                                    <a href="@EntryUrl(nbiitem,Model,false)" style="color:red;">&#11044;&nbsp;@nbiitem.GetXmlProperty("genxml/productname")&nbsp;@nbiitem.GetXmlProperty("genxml/modeldesc")</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="@EntryUrl(nbiitem,Model,false)">@nbiitem.GetXmlProperty("genxml/productname")&nbsp;@nbiitem.GetXmlProperty("genxml/modeldesc")</a>
+                                                    }
+
+
+                                                </b>
                                             </div>
 
                                             <div>

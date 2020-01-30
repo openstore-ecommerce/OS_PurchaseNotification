@@ -18,6 +18,12 @@ $(document).ready(function () {
         }
     });
 
+    $('#cmdtestemail').unbind('click');
+    $('#cmdtestemail').click(function () {
+        $('.processing').show();
+        nbxget('os_purchasenotification_testemail', '#selectparams', '#editdata');
+    });
+
     $('.selecteditlanguage').unbind('click');
     $('.selecteditlanguage').click(function () {
         $('.processing').show();

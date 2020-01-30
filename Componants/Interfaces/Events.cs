@@ -81,8 +81,6 @@ namespace OpenStore.Providers.OS_PurchaseNotification
             var orderData = new OrderData(nbrightInfo.ItemID);
 
             // remove and products that have reached the client purchase limit
-            var adjusted = false;
-            var productmsg = "";
             var cartitemList = orderData.GetCartItemList();
             var sendEmailFlag = false;
 
@@ -107,23 +105,15 @@ namespace OpenStore.Providers.OS_PurchaseNotification
 
             if (sendEmailFlag)
             {
-
-                //var passSettings = new Dictionary<string, string>();
-                //var emailBody = NBrightBuyUtils.RazorTemplRender("EmailHtmlOutput.cshtml", 0, "", orderData, "/DesktopModules/NBright/OS_PurchaseNotification", "config", orderData.Lang, passSettings);
-                //if (StoreSettings.Current.DebugModeFileOut) Utils.SaveFile(PortalSettings.Current.HomeDirectoryMapPath + "\\testemail.html", emailBody);
+                var passSettings = new Dictionary<string, string>();
+                var emailBody = NBrightBuyUtils.RazorTemplRender("EmailHtmlOutput.cshtml", 0, "", orderData, "/DesktopModules/NBright/OS_PurchaseNotification", "config", orderData.Lang, passSettings);
 
                 var emailList = StoreSettings.Current.ManagerEmail + ",";
                 emailList += purhcaseNotifyInfo.GetXmlPropertyBool("genxml/textbox/emailcsv");
                 emailList = emailList.TrimEnd(',');
 
-                //NBrightBuyUtils.SendEmail(emailBody, emailList, "", orderData.GetInfo(), "", "", orderData.Lang);
+                NBrightBuyUtils.SendEmail(emailBody, emailList, "", orderData.GetInfo(), "", "", orderData.Lang);
             }
-
-            // TEST - remove XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-            var passSettings = new Dictionary<string, string>();
-            var emailBody = NBrightBuyUtils.RazorTemplRender("EmailHtmlOutput.cshtml", 0, "", orderData, "/DesktopModules/NBright/OS_PurchaseNotification", "config", orderData.Lang, passSettings);
-            if (StoreSettings.Current.DebugModeFileOut) Utils.SaveFile(PortalSettings.Current.HomeDirectoryMapPath + "\\testemail.html", emailBody);
-            // TEST XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
             return nbrightInfo;
         }
