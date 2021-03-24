@@ -1,2 +1,4 @@
 # OS_PurchaseNotification
 OS_PurchaseNotification
+
+COMPLETETION UNVERIFIED
